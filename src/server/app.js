@@ -45,7 +45,7 @@ app.use(async (ctx, next) => {
 
 app.on('error', (err, ctx) => {
   console.log(err);
-  console.log("status ====> 事实上", ctx.status);
+  console.log("status ====> ", ctx.status);
 })
 
 Object.keys(routers).map(key => {
