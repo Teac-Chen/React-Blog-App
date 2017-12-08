@@ -43,10 +43,18 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ctx.status} - ${ms}ms`);
 });
 
-app.on('error', (err, ctx) => {
-  console.log(err);
-  console.log("status ===> ", ctx.status);
-})
+app.use(async (ctx, next) => {
+  try{
+    await next();
+  }catch(e){
+    ctx.status = 500;
+    ctx.redirect('/error500');
+  }
+
+  if(ctx.status == 404){
+    ctx.redirect('/error404');
+  }
+});
 
 Object.keys(routers).map(key => {
   app.use(routers[key].middleware())

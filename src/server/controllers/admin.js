@@ -1,5 +1,8 @@
-export const index = (ctx, next) => {
-  ctx.body = `Welcome to admin index page! Prefix: ${ctx.route.prefix}`;
+export const index = async (ctx, next) => {
+  await ctx.render('admin', {
+    layout: false,
+    title: '后台首页'
+  });
   return next();
 }
 
