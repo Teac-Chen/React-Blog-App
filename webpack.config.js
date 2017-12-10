@@ -13,17 +13,20 @@ let plugins = [
     allChunks: true
   }), // 分离css和js文件
   new webpack.optimize.OccurrenceOrderPlugin(), // 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
-  new webpack.optimize.UglifyJsPlugin(), // 压缩JS代码
-  /*new webpack.optimize.CommonsChunkPlugin({
-    name: 'common'
-  }),*/ // 抽取出相同的模块，防止重复引入
+  // new webpack.optimize.UglifyJsPlugin(), // 压缩JS代码
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'common',
+    chunks: ['admin']
+  }), // 抽取出相同的模块，防止重复引入
   new HtmlWebpackPlugin({
     template: path.join(__dirname, '/src/client/front/views/front.ejs'),
-    filename: path.join('../views/front.html')
+    filename: path.join('../views/front.html'),
+    chunk: ['front']
   }),
   new HtmlWebpackPlugin({
     template: path.join(__dirname, '/src/client/admin/admin.ejs'),
-    filename: path.join('../views/admin.html')
+    filename: path.join('../views/admin.html'),
+    chunk: ['vendors', 'admin']
   })
 ];
 
@@ -48,11 +51,19 @@ files.map(file => {
 
 module.exports = {
   devtool: 'eval-source-map',
-  entry: path.join(__dirname, "/src/client/front/public/js/main.js"),
+  entry: {
+    front: path.join(__dirname, "/src/client/front/public/js/main.js"),
+    admin: path.join(__dirname, "/src/client/admin/main.js"),
+    vendors: ["react", "react-dom"]
+  },
   output: {
     path: path.join(__dirname, "/bin/client/public/"),
-    filename: "js/bundle.js",
+    filename: "js/build-[name].js",
+    chunkFilename: 'js/[id]-chunk-[name].js',
     publicPath: "/"
+  },
+  resolve: {
+    extensions: ['.js', '.json', '.jsx']
   },
   watch: true,
   watchOptions: {
@@ -60,11 +71,11 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: '/(\.js)$/',
+      test: /\.js$/,
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['env']
+          preset: ['react', 'env']
         }
       },
       exclude: /node_modules/
@@ -90,9 +101,7 @@ module.exports = {
       })
     },{
       test: /(\.ejs)$/,
-      use: {
-        loader: 'raw-loader'
-      }
+      use: 'raw-loader'
     }]
   },
   plugins: plugins
