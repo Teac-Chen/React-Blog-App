@@ -8,25 +8,28 @@ let plugins = [
   new webpack.BannerPlugin('Teac所有，翻版必究（开个玩笑）'), // 为编译过后的文件添加一个注释头
   new ExtractTextPlugin({
     filename: (getPath) => {
-      return getPath('css/main.css')
+      return getPath('css/[name].css')
     },
     allChunks: true
   }), // 分离css和js文件
   new webpack.optimize.OccurrenceOrderPlugin(), // 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
   // new webpack.optimize.UglifyJsPlugin(), // 压缩JS代码
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'common',
-    chunks: ['admin']
+    name: "vendors",
+    filename: 'js/react.js',
+    minChunks: 2,
   }), // 抽取出相同的模块，防止重复引入
   new HtmlWebpackPlugin({
     template: path.join(__dirname, '/src/client/front/views/front.ejs'),
     filename: path.join('../views/front.html'),
-    chunk: ['front']
+    favicon: path.join(__dirname, '/libs/favicon.ico'),
+    chunks: ['front']
   }),
   new HtmlWebpackPlugin({
     template: path.join(__dirname, '/src/client/admin/admin.ejs'),
     filename: path.join('../views/admin.html'),
-    chunk: ['vendors', 'admin']
+    favicon: path.join(__dirname, '/libs/favicon.ico'),
+    chunks: ['vendors', 'admin']
   })
 ];
 
@@ -53,7 +56,7 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: {
     front: path.join(__dirname, "/src/client/front/public/js/main.js"),
-    admin: path.join(__dirname, "/src/client/admin/main.js"),
+    admin: path.join(__dirname, "/src/client/admin/main.jsx"),
     vendors: ["react", "react-dom"]
   },
   output: {
@@ -75,28 +78,28 @@ module.exports = {
       use: {
         loader: 'babel-loader',
         options: {
-          preset: ['react', 'env']
+          presets: ['env']
         }
       },
       exclude: /node_modules/
     },{
-      test: /(\.scss)$/,
+      test: /\.jsx$/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['react', 'env'],
+          plugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: 'css' }]]
+        }
+      },
+      exclude: /node_modules/
+    },{
+      test: /\.(scss|css)$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },
+          'css-loader',
           'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
-          }
+          'sass-loader'
         ]
       })
     },{

@@ -52,6 +52,7 @@ app.use(async (ctx, next) => {
   }
 
   if(ctx.status == 404){
+    console.log(404444444444444444444444444444444444);
     ctx.redirect('/error404');
   }
 });
