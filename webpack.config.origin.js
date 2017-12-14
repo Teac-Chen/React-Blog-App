@@ -17,7 +17,7 @@ let plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: "vendors",
     filename: 'js/react.js',
-    minChunks: 2,
+    minChunks: 3,
   }), // 抽取出相同的模块，防止重复引入
   new HtmlWebpackPlugin({
     template: path.join(__dirname, '/src/client/front/views/front.ejs'),
