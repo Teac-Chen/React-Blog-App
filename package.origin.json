@@ -5,9 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp",
+    "dev": "nodemon bin/server/app.js",
     "webpack:admin": "webpack --config ./config/webpack.admin.js",
     "webpack:front": "webpack --config ./config/webpack.front.js"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "bin/server"
+    ],
+    "delay": "1000"
   },
   "repository": {
     "type": "git",
