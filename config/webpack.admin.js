@@ -18,7 +18,12 @@ module.exports = merge(baseConfig, {
     admin: path.join(__dirname, '../', "/src/client/admin/main.jsx")
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx']
+    extensions: ['.js', '.json', '.jsx'],
+    alias: {
+        'views': path.resolve(__dirname, '../src/client/admin/views'),
+        'styles': path.resolve(__dirname, '../src/client/admin/styles'),
+        'routers': path.resolve(__dirname, '../src/client/admin/routers')
+    }
   },
   module: {
     rules: [{
