@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import routers from 'routers';
 
 import Layout from 'views/Layout';
 

@@ -8,22 +8,28 @@ let selectedKeys = [];
 class SiderBar extends React.Component {
   constructor(props){
     super(props)
-    selectedKeys = this.getCurrentMenuSelectedKeys()
+    selectedKeys = this.getCurrentMenuSelectedKeys(props)
   }
 
-  getCurrentMenuSelectedKeys(props) {
+  getCurrentMenuSelectedKeys(props){
     const { location: { pathname } } = props || this.props;
     const keys = pathname.split('/').slice(2);
-    if (keys.length === 1 && keys[0] === '') {
+    if (pathname ==='/admin' || keys.length === 1 && keys[0] === '') {
       return ['home'];
     }
     return keys;
   }
 
+  getMenu(routers, parentPath = ''){
+    return routers.map((router, index) => {
+
+    })
+  }
+
   render(){
     return (
       <Sider trigger={null} collapsible collapsed={this.props.collapsed} >
-        <div className='logo' />
+        <div className='logo'>TEAC</div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={selectedKeys}>
           {this.props.routers.map((router, index) => (
             <Menu.Item key={router.key}>

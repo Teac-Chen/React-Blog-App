@@ -7,7 +7,7 @@ const baseConfig = require('./webpack.base.js');
 
 let plugins = [
   new HtmlWebpackPlugin({
-    template: path.join(__dirname, '../', '/src/client/admin/admin.ejs'),
+    template: path.join(__dirname, '../', '/src/client/admin/index.ejs'),
     filename: path.join('../views/admin.html'),
     favicon: path.join(__dirname, '../', '/libs/favicon.ico')
   })
