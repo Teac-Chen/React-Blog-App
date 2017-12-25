@@ -22,7 +22,8 @@ module.exports = merge(baseConfig, {
     alias: {
         'views': path.resolve(__dirname, '../src/client/admin/views'),
         'styles': path.resolve(__dirname, '../src/client/admin/styles'),
-        'routers': path.resolve(__dirname, '../src/client/admin/routers')
+        'routers': path.resolve(__dirname, '../src/client/admin/routers'),
+        'components': path.resolve(__dirname, '../src/client/admin/components')
     }
   },
   module: {

@@ -7,8 +7,6 @@ import SiderBar from './SiderBar';
 import Header from './Header';
 import Content from './Content';
 
-import 'styles/main.scss';
-
 class LayoutBar extends React.Component {
   constructor(){
     super()

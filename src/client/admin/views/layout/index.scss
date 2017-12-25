@@ -1,0 +1,73 @@
+$blue: #1890ff;
+$lightBlue: #e6f7ff;
+
+.logo {
+  height: 32px;
+  background-color: rgba(225, 225, 225, .2);
+  margin: 16px;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 32px;
+  font-weight: bold;
+}
+
+.header {
+  background: #fff;
+  padding: 0 20px 0 0;
+
+  .right {
+    height: 100%;
+    float: right;
+
+    .tool {
+      display: inline-block;
+      height: 100%;
+      cursor: pointer;
+      padding: 0 15px;
+      transition: all .3s;
+
+      &:hover {
+        background-color: $lightBlue;
+      }
+    }
+
+    .user {
+      position: relative;
+      padding-left: 52px;
+
+      .avatar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 15px;
+        margin: auto;
+      }
+    }
+  }
+}
+.menu {
+  :global(.anticon) {
+    margin-right: 8px;
+  }
+  :global(.ant-dropdown-menu-item) {
+    width: 160px;
+  }
+}
+
+.triggerIcon {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+.toolIcon {
+  font-size: 16px;
+  padding: 4px;
+}

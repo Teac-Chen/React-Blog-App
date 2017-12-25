@@ -2,6 +2,8 @@ import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
+import styles from './index.scss';
+
 const { Sider } = Layout;
 let selectedKeys = [];
 
@@ -29,7 +31,7 @@ class SiderBar extends React.Component {
   render(){
     return (
       <Sider trigger={null} collapsible collapsed={this.props.collapsed} >
-        <div className='logo'>TEAC</div>
+        <div className={styles.logo}>TEAC</div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={selectedKeys}>
           {this.props.routers.map((router, index) => (
             <Menu.Item key={router.key}>
