@@ -17,16 +17,7 @@ const menu = (
 class HeaderBar extends React.Component {
   constructor(porps){
     super(porps)
-    /*this.state = {
-      dropdownIcon: "down"
-    }*/
   }
-
-  /*dropdownChange(visible){
-    this.setState((preState) => ({
-      dropdownIcon: visible ? "up" : "down"
-    }))
-  }*/
 
   render(){
     return (
@@ -42,12 +33,7 @@ class HeaderBar extends React.Component {
               <span>1111</span>
             </Notice>
           </span>
-          <span className={styles.tool}>
-            <Badge count={12}>
-              <Icon type="bell" className={styles.toolIcon} />
-            </Badge>
-          </span>
-          <Dropdown overlay={menu} onVisibleChange={v => this.dropdownChange(v)}>
+          <Dropdown overlay={menu} >
             <span className={`${styles.tool} ${styles.user}`}>
               <Avatar className={styles.avatar} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
               Teac

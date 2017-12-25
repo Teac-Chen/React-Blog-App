@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popover, Icon, Tabs, Badge, Spin } from 'antd';
 
-import styles from './index.scss'
+import styles from './index.scss';
 
 class Notice extends React.Component {
   constructor(props){
@@ -12,6 +12,14 @@ class Notice extends React.Component {
     console.log(this.props)
   }
 
+  getNoticeList(){
+    const { children, loading } = this.props;
+
+    if(!children){
+      return null;
+    }
+  }
+
   render(){
     const { count } = this.props;
     const content = (
@@ -19,11 +27,6 @@ class Notice extends React.Component {
         <p>Content</p>
         <p>Content</p>
       </div>
-    )
-    const trigger = (
-      <Badge count={count}>
-        <Icon type="bell" className={styles.icon} />
-      </Badge>
     )
 
     return (
@@ -34,7 +37,9 @@ class Notice extends React.Component {
         arrowPointAtCenter
         onVisibleChange={() => this.onPopupVisibleChange()}
       >
-        {trigger}
+        <Badge count={count}>
+          <Icon type="bell" className={styles.icon} />
+        </Badge>
       </Popover>
     )
   }
